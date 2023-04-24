@@ -22,19 +22,19 @@ export default function Ship(shipArrayCoordinate = [], hits = 0) {
       console.log(
         `You hit ${attackCoordinate}!, He now only have ${length - shipHits}`
       );
-      return length - shipHits;
+      return true;
     }
 
-    return "You miss!";
+    return false;
   }
 
   function isSunk() {
     if (shipHits === length) {
       sunk = true;
-      return "The ship has sunk!!";
+      return length - getShipHits();
     }
 
-    return `You still have ${length - shipHits} ships coordinates left.`;
+    return length - getShipHits();
   }
 
   function getShipHits() {
