@@ -19,9 +19,6 @@ export default function Ship(shipArrayCoordinate = [], hits = 0) {
     if (shipCoordinate.includes(attackCoordinate)) {
       shipHits += 1;
 
-      console.log(
-        `You hit ${attackCoordinate}!, He now only have ${length - shipHits}`
-      );
       return true;
     }
 

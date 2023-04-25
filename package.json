@@ -12,5 +12,13 @@
   "devDependencies": {
     "@babel/preset-env": "^7.21.4",
     "jest": "^29.5.0"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!your-module-to-transform)/"
+    ]
   }
 }

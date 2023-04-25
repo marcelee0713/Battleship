@@ -1,6 +1,6 @@
 import Ship from "./Ship";
 
-export default function Gameboard() {
+export default function Gameboard(player) {
   // From what I know,
   // A Gameboard should loop for five times since there are five ships
   // Now every iteration, the gameboard ask for the values of each ships.
@@ -11,11 +11,12 @@ export default function Gameboard() {
   // Basically in the UI, it should wait for the user to
   // Press where he wants to put his ships.
   // But for now we have to put a fixed coordinates in each ships
-  const ship1 = Ship(["A2", "B2", "C2", "D2", "E2"]);
-  const ship2 = Ship(["F1", "F2", "F3", "F4"]);
-  const ship3 = Ship(["H10", "I10", "J10"]);
-  const ship4 = Ship(["D8", "D9", "D10"]);
-  const ship5 = Ship(["G6", "H6"]);
+  const playerCoordinates = player.getCoordinates();
+  const ship1 = Ship(playerCoordinates[0]);
+  const ship2 = Ship(playerCoordinates[1]);
+  const ship3 = Ship(playerCoordinates[2]);
+  const ship4 = Ship(playerCoordinates[3]);
+  const ship5 = Ship(playerCoordinates[4]);
 
   // From what I know, also from this part
   // If we ever hit any one of them. We check if all of them sunk or not.
@@ -56,7 +57,12 @@ export default function Gameboard() {
     return false;
   }
 
+  function getPlayerCoordinates() {
+    return playerCoordinates;
+  }
+
   return {
+    getPlayerCoordinates,
     receivedAttack,
     playerAllShipSunk,
   };
