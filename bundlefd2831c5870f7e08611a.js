@@ -1535,6 +1535,9 @@ let playerCoordinates = await (0,_PlayerChoose__WEBPACK_IMPORTED_MODULE_5__["def
 let computerCoordinates = await (0,_ComputerRandomize__WEBPACK_IMPORTED_MODULE_4__["default"])();
 
 const computerHitCollector = [];
+let computerHits = "";
+let computerNextTargets = [];
+let hasTargets = false;
 
 const player = (0,_Player__WEBPACK_IMPORTED_MODULE_2__["default"])(playerCoordinates);
 const playerGameBoard = (0,_Gameboard__WEBPACK_IMPORTED_MODULE_0__["default"])(player);
@@ -1591,8 +1594,9 @@ computerCoordinatesBox.forEach((computerBoxes) => {
         });
       }
 
-      const computerResult = computerAttack(randomCoordinate());
-      console.log(computerResult);
+      const computerResult = computerAttack(
+        computerHits === "" ? randomCoordinate() : ai()
+      );
       if (computerResult === "game-over") {
         modal.style.display = "flex";
         decisionWinner.textContent = "WE LOST CAPTAIN";
@@ -1603,11 +1607,13 @@ computerCoordinatesBox.forEach((computerBoxes) => {
         playerCoordinatesBox.forEach((value) => {
           if (typeof computerResult === "object") {
             if (value.id === computerResult[1]) {
+              computerHits = "";
               value.style.backgroundColor = "#FF4343";
               return;
             }
           } else if (value.id === computerResult) {
             value.style.backgroundColor = "#54EF1E";
+            computerHits = computerResult;
             return;
           }
         });
@@ -1648,6 +1654,58 @@ function randomCoordinate() {
   computerHitCollector.push(random);
 
   return random;
+}
+
+function ai() {
+  let hit = "";
+  playerCoordinates.forEach((ship) => {
+    if (ship.includes(computerHits)) {
+      const indexOfHit = ship.indexOf(computerHits);
+      const length = ship.length - 1;
+
+      if (hasTargets) {
+        const target = computerNextTargets.shift();
+        computerHitCollector.push(target);
+        hit = target;
+
+        if (computerNextTargets.length === 0) {
+          computerHits = "";
+          hasTargets = false;
+        }
+      } else {
+        if (indexOfHit === length) {
+          for (let i = length; i >= 0; i--) {
+            if (!computerHitCollector.includes(ship[i])) {
+              computerNextTargets.push(ship[i]);
+              hasTargets = true;
+            }
+          }
+          if (hasTargets) {
+            const target = computerNextTargets.shift();
+            computerHitCollector.push(target);
+            hit = target;
+            computerHits = target;
+          } else {
+            computerHits = "";
+            computerHitCollector.push(ship[length]);
+            hit = randomCoordinate();
+          }
+        } else {
+          const newIndex = indexOfHit + 1;
+          if (computerHitCollector.includes(ship[newIndex])) {
+            computerHits = "";
+            hit = randomCoordinate();
+          } else {
+            computerHitCollector.push(ship[newIndex]);
+            console.log("AI Hits: " + ship[newIndex]);
+            hit = ship[newIndex];
+          }
+        }
+      }
+    }
+  });
+
+  return hit;
 }
 
 __webpack_async_result__();
@@ -2439,4 +2497,4 @@ function HandleUnHover(rotation, index, mode) {
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=bundlee84a483b5574ba975e88.js.map
+//# sourceMappingURL=bundlefd2831c5870f7e08611a.js.map
