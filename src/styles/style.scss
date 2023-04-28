@@ -1,0 +1,353 @@
+@import url("https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Roboto&display=swap");
+$primaryColor: #414141;
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+html {
+  width: 100%;
+  height: 100vh;
+}
+body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: $primaryColor;
+  color: #d9d9d9;
+}
+main {
+  padding: 0 40px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+  .player-container,
+  .computer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-family: "Roboto", sans-serif;
+    .player-grid,
+    .computer-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      height: 600px;
+      width: 600px;
+      background-color: #d9d9d9;
+      .box {
+        cursor: pointer;
+        border: 1px solid $primaryColor;
+        transition: 250ms ease-in-out;
+        &:hover {
+          background-color: #747474;
+        }
+      }
+    }
+  }
+}
+header {
+  padding-top: 20px;
+  font-family: "Bruno Ace SC", cursive;
+  font-size: 40px;
+  text-align: center;
+}
+footer {
+  margin-bottom: 10px;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  a {
+    color: #d9d9d9;
+    align-self: center;
+    text-decoration: none;
+    width: fit-content;
+
+    &:hover {
+      .name {
+        text-decoration: underline;
+      }
+      .github-logo {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  .credit {
+    font-size: 1.2rem;
+    width: auto;
+    display: flex;
+    gap: 0.2em;
+
+    .github-logo {
+      transition: 250ms ease-in-out;
+    }
+  }
+}
+
+.style-modal {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  position: fixed;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #f2f2f2;
+}
+.modal-content {
+  font-family: "Bruno Ace SC", cursive;
+  color: #000;
+  padding: 0.2em;
+  width: 670px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #d9d9d9;
+  font-size: 32px;
+  gap: 10px;
+}
+.start-modal-content {
+  color: #000;
+  padding: 0.5em 1em;
+  width: 650px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  background-color: #d9d9d9;
+  font-size: 32px;
+  gap: 10px;
+  .start-modal-header {
+    font-family: "Bruno Ace SC", cursive;
+
+    p {
+      font-size: 30px;
+    }
+  }
+
+  .coordinate-container {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    .sub-text {
+      font-family: "Bruno Ace SC", cursive;
+      font-size: 16px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      height: 500px;
+      width: 500px;
+      background-color: #d9d9d9;
+      .grid-box {
+        cursor: pointer;
+        border: 1px solid $primaryColor;
+        transition: 250ms ease-in-out;
+        &:hover {
+          background-color: #747474;
+        }
+      }
+    }
+  }
+
+  .button-container {
+    align-self: center;
+    display: flex;
+    gap: 5px;
+
+    button {
+      font-family: "Bruno Ace SC", cursive;
+      cursor: pointer;
+      outline: none;
+      border: none;
+      background-color: #000;
+      color: #d9d9d9;
+      height: 50px;
+      width: 125px;
+      transition: 0.2s ease-in-out;
+      &:hover {
+        transform: translateY(-5px);
+      }
+    }
+  }
+}
+.restart-style-button {
+  width: 200px;
+  font-size: 1.2rem;
+  background-color: #1c1c1c;
+  outline: none;
+  border: none;
+  padding: 0.8em;
+  border-radius: 8px;
+  color: #f2f2f2;
+  font-family: "Bruno Ace SC", cursive;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.restart-style-button:hover {
+  background-color: #303030;
+}
+
+@media only screen and (max-width: 81.625em) {
+  main {
+    .player-container,
+    .computer-container {
+      .player-grid,
+      .computer-grid {
+        height: 500px;
+        width: 500px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 69.375em) {
+  main {
+    .player-container,
+    .computer-container {
+      .player-grid,
+      .computer-grid {
+        height: 400px;
+        width: 400px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 56.75em) {
+  main {
+    .player-container,
+    .computer-container {
+      .player-grid,
+      .computer-grid {
+        height: 300px;
+        width: 300px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 44.0625em) {
+  header {
+    font-size: 24px;
+  }
+  main {
+    gap: 25px;
+    flex-direction: column;
+    .player-container,
+    .computer-container {
+      .player-grid,
+      .computer-grid {
+        height: 300px;
+        width: 300px;
+      }
+    }
+  }
+  .start-modal-content {
+    margin: 0.7em;
+    width: 450px;
+    height: 500px;
+    justify-content: center;
+    font-size: 16px;
+    .start-modal-header {
+      align-self: center;
+      font-family: "Bruno Ace SC", cursive;
+      text-align: center;
+      p {
+        font-size: 16px;
+      }
+    }
+
+    .coordinate-container {
+      align-self: center;
+      display: flex;
+      flex-direction: column;
+      .sub-text {
+        font-family: "Bruno Ace SC", cursive;
+        font-size: 12px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        height: 300px;
+        width: 300px;
+        background-color: #d9d9d9;
+        .grid-box {
+          cursor: pointer;
+          border: 1px solid $primaryColor;
+          transition: 250ms ease-in-out;
+          &:hover {
+            background-color: #747474;
+          }
+        }
+      }
+    }
+
+    .button-container {
+      align-self: center;
+      display: flex;
+      gap: 5px;
+      font-size: 12px;
+      button {
+        font-family: "Bruno Ace SC", cursive;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        background-color: #000;
+        color: #d9d9d9;
+        height: 25px;
+        width: 100px;
+        transition: 0.2s ease-in-out;
+        &:hover {
+          transform: translateY(-5px);
+        }
+      }
+    }
+  }
+
+  .modal-content {
+    width: 320px;
+    height: 200px;
+    font-size: 20px;
+  }
+
+  footer {
+    margin-bottom: 5px;
+    a {
+      color: #d9d9d9;
+      align-self: center;
+      text-decoration: none;
+      width: fit-content;
+
+      &:hover {
+        .name {
+          text-decoration: underline;
+        }
+        .github-logo {
+          transform: rotate(360deg);
+        }
+      }
+    }
+
+    .credit {
+      font-size: 0.8rem;
+      width: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.2em;
+
+      .github-logo {
+        transition: 250ms ease-in-out;
+      }
+    }
+  }
+}

@@ -10,17 +10,17 @@ export default function ComputerGameboard(computer) {
 
   function receivedAttack(coordinateAttack) {
     if (computerShip1.hit(coordinateAttack)) {
-      return !computerAllShipSunk() ? "You hit CPU Ship 1" : "Game is done";
+      return !computerAllShipSunk() ? "hit" : "game-over";
     } else if (computerShip2.hit(coordinateAttack)) {
-      return !computerAllShipSunk() ? "You hit CPU Ship 2" : "Game is done";
+      return !computerAllShipSunk() ? "hit" : "game-over";
     } else if (computerShip3.hit(coordinateAttack)) {
-      return !computerAllShipSunk() ? "You hit CPU Ship 3" : "Game is done";
+      return !computerAllShipSunk() ? "hit" : "game-over";
     } else if (computerShip4.hit(coordinateAttack)) {
-      return !computerAllShipSunk() ? "You hit CPU Ship 4" : "Game is done";
+      return !computerAllShipSunk() ? "hit" : "game-over";
     } else if (computerShip5.hit(coordinateAttack)) {
-      return !computerAllShipSunk() ? "You hit CPU Ship 5" : "Game is done";
+      return !computerAllShipSunk() ? "hit" : "game-over";
     } else {
-      return "You miss";
+      return "miss";
     }
   }
 

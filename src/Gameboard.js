@@ -20,19 +20,22 @@ export default function Gameboard(player) {
 
   // From what I know, also from this part
   // If we ever hit any one of them. We check if all of them sunk or not.
+
+  // We return the coordinate attack because it's goign to handle the UI
   function receivedAttack(coordinateAttack) {
     if (ship1.hit(coordinateAttack)) {
-      return !playerAllShipSunk() ? "You hit Ship 1" : "Game is done";
+      return !playerAllShipSunk() ? coordinateAttack : "game-over";
     } else if (ship2.hit(coordinateAttack)) {
-      return !playerAllShipSunk() ? "You hit Ship 2" : "Game is done";
+      return !playerAllShipSunk() ? coordinateAttack : "game-over";
     } else if (ship3.hit(coordinateAttack)) {
-      return !playerAllShipSunk() ? "You hit Ship 3" : "Game is done";
+      return !playerAllShipSunk() ? coordinateAttack : "game-over";
     } else if (ship4.hit(coordinateAttack)) {
-      return !playerAllShipSunk() ? "You hit Ship 4" : "Game is done";
+      return !playerAllShipSunk() ? coordinateAttack : "game-over";
     } else if (ship5.hit(coordinateAttack)) {
-      return !playerAllShipSunk() ? "You hit Ship 5" : "Game is done";
+      return !playerAllShipSunk() ? coordinateAttack : "game-over";
     } else {
-      return "You miss";
+      // This is a miss
+      return ["miss", coordinateAttack];
     }
   }
 
