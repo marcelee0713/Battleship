@@ -23,6 +23,8 @@ let playerCoordinates = await getPlayerCoordinates();
 
 let computerCoordinates = await getComputerCoordinates();
 
+const computerHitCollector = [];
+
 const player = Player(playerCoordinates);
 const playerGameBoard = Gameboard(player);
 
@@ -120,8 +122,6 @@ function computerAttack(coordinate) {
 }
 
 function randomCoordinate() {
-  const computerHitCollector = [];
-
   const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
   let randomLetter = letters[Math.floor(Math.random() * letters.length)];
