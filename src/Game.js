@@ -24,6 +24,9 @@ let playerCoordinates = await getPlayerCoordinates();
 let computerCoordinates = await getComputerCoordinates();
 
 const computerHitCollector = [];
+let computerHits = "";
+let computerNextTargets = [];
+let hasTargets = false;
 
 const player = Player(playerCoordinates);
 const playerGameBoard = Gameboard(player);
@@ -80,8 +83,9 @@ computerCoordinatesBox.forEach((computerBoxes) => {
         });
       }
 
-      const computerResult = computerAttack(randomCoordinate());
-      console.log(computerResult);
+      const computerResult = computerAttack(
+        computerHits === "" ? randomCoordinate() : ai()
+      );
       if (computerResult === "game-over") {
         modal.style.display = "flex";
         decisionWinner.textContent = "WE LOST CAPTAIN";
@@ -92,11 +96,13 @@ computerCoordinatesBox.forEach((computerBoxes) => {
         playerCoordinatesBox.forEach((value) => {
           if (typeof computerResult === "object") {
             if (value.id === computerResult[1]) {
+              computerHits = "";
               value.style.backgroundColor = "#FF4343";
               return;
             }
           } else if (value.id === computerResult) {
             value.style.backgroundColor = "#54EF1E";
+            computerHits = computerResult;
             return;
           }
         });
@@ -137,4 +143,56 @@ function randomCoordinate() {
   computerHitCollector.push(random);
 
   return random;
+}
+
+function ai() {
+  let hit = "";
+  playerCoordinates.forEach((ship) => {
+    if (ship.includes(computerHits)) {
+      const indexOfHit = ship.indexOf(computerHits);
+      const length = ship.length - 1;
+
+      if (hasTargets) {
+        const target = computerNextTargets.shift();
+        computerHitCollector.push(target);
+        hit = target;
+
+        if (computerNextTargets.length === 0) {
+          computerHits = "";
+          hasTargets = false;
+        }
+      } else {
+        if (indexOfHit === length) {
+          for (let i = length; i >= 0; i--) {
+            if (!computerHitCollector.includes(ship[i])) {
+              computerNextTargets.push(ship[i]);
+              hasTargets = true;
+            }
+          }
+          if (hasTargets) {
+            const target = computerNextTargets.shift();
+            computerHitCollector.push(target);
+            hit = target;
+            computerHits = target;
+          } else {
+            computerHits = "";
+            computerHitCollector.push(ship[length]);
+            hit = randomCoordinate();
+          }
+        } else {
+          const newIndex = indexOfHit + 1;
+          if (computerHitCollector.includes(ship[newIndex])) {
+            computerHits = "";
+            hit = randomCoordinate();
+          } else {
+            computerHitCollector.push(ship[newIndex]);
+            console.log("AI Hits: " + ship[newIndex]);
+            hit = ship[newIndex];
+          }
+        }
+      }
+    }
+  });
+
+  return hit;
 }
