@@ -1534,6 +1534,8 @@ let playerCoordinates = await (0,_PlayerChoose__WEBPACK_IMPORTED_MODULE_5__["def
 
 let computerCoordinates = await (0,_ComputerRandomize__WEBPACK_IMPORTED_MODULE_4__["default"])();
 
+const computerHitCollector = [];
+
 const player = (0,_Player__WEBPACK_IMPORTED_MODULE_2__["default"])(playerCoordinates);
 const playerGameBoard = (0,_Gameboard__WEBPACK_IMPORTED_MODULE_0__["default"])(player);
 
@@ -1631,8 +1633,6 @@ function computerAttack(coordinate) {
 }
 
 function randomCoordinate() {
-  const computerHitCollector = [];
-
   const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
   const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
   let randomLetter = letters[Math.floor(Math.random() * letters.length)];
@@ -2439,4 +2439,4 @@ function HandleUnHover(rotation, index, mode) {
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=bundle9a419a81122d4b826bd9.js.map
+//# sourceMappingURL=bundlee84a483b5574ba975e88.js.map
